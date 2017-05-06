@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//dfs LUDR "..\dodatki\\uklady\4x4_05_00054.txt" 4x4_01_0001_dfs_ludr_sol.txt 4x4_01_0001_dfs_ludr_stats.txt
 /**
  *
  * @author maciek
@@ -23,17 +23,17 @@ public class main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException { 
         // TODO code application logic here
         c("rozwiązywanie piętnastki");
-        String rodzajAlgorytmu, porzadek, plikWejsciowy, plikRozwiazenie, plikStat;
+        String rodzajAlgorytmu, strategia, plikWejsciowy, plikRozwiazenie, plikStat;
         rodzajAlgorytmu = args[0];
-        porzadek = args[1];
+        strategia = args[1];
         plikWejsciowy = args[2];
         plikRozwiazenie = args[3];
         plikStat = args[4];
         c("rodzaj algorytmu: " + rodzajAlgorytmu);
-        c("porządek przeszukiwania sąsiedztwa: " + porzadek);
+        c("porządek przeszukiwania sąsiedztwa: " + strategia);
         c("plik z układem początkowym: " + plikWejsciowy);
         c("plik z rozwiązeniem będzie: " + plikRozwiazenie);
         c("plik ze statystykami: " + plikStat);
@@ -56,8 +56,15 @@ public class main {
         }
         u.znajdzZero();
         
-        testPrzesuwania(u);
-
+        long czasStart, czasStop;
+        c("");
+        c(u);
+        czasStart= System.nanoTime();
+        DFS dfs;
+            dfs = new DFS(u, strategia);
+            
+        czasStop = System.nanoTime();
+        c(((czasStop - czasStart)/1000)/1000.0); //nie "/1000000", bo wtedy nie byłoby części ułamkowej, a nie "/1000000.0" bo wtedy byłaby zbyt duza dokladnosc (wymagana jest dokladnosc 3 miejsc po przecinku)
     }
     
     public static void c(Object o)
@@ -90,34 +97,19 @@ public class main {
     {
         c(u);
         u.przesun('U');
-        c(u);
         u.przesun('U');
-        c(u);
         u.przesun('U');
-        c(u);
         u.przesun('U');
-        c(u);
         u.przesun('L');
-        c(u);
         u.przesun('L');
-        c(u);
         u.przesun('L');
-        c(u);
         u.przesun('R');
-        c(u);
         u.przesun('R');
-        c(u);
         u.przesun('R');
-        c(u);
         u.przesun('R');
-        c(u);
         u.przesun('D');
-        c(u);
         u.przesun('D');
-        c(u);
         u.przesun('D');
-        c(u);
         u.przesun('D');
-        c(u);
     }
 }

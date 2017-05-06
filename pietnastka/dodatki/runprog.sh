@@ -18,7 +18,7 @@
 #  progname="java /home/user/15puzzle/bin/solver" (Java class)
 #  progname="java -jar /home/user/15puzzle/bin/solver.jar" (executable jar file)
 
-progname="./program"
+progname="program.bat"
 orders=(RDUL RDLU DRUL DRLU LUDR LURD ULDR ULRD)
 heuristics=(hamm manh)
 filename_regex="^[a-zA-Z0-9]+_[0-9]+_[0-9]+.txt$"

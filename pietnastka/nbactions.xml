@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath ${packageClassName} dfs LUDR "..\dodatki\uklady\4x4_05_00054.txt" 4x4_01_0001_dfs_ludr_sol.txt 4x4_01_0001_dfs_ludr_stats.txt</exec.args>
+                <exec.args>-classpath %classpath com.mycompany.pietnastka.main dfs LUDR "..\dodatki\uklady\4x4_05_00054.txt" 4x4_01_0001_dfs_ludr_sol.txt 4x4_01_0001_dfs_ludr_stats.txt</exec.args>
                 <exec.executable>java</exec.executable>
                 <exec.workingdir>C:\Users\maciek\programy\sise\pietnastka\target</exec.workingdir>
             </properties>

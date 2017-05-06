@@ -72,26 +72,45 @@ public class Uklad {
         return res;
     }
     
-    public void przesun(char c)
+    public boolean przesun(char c)
     {
+        boolean czyUdaloSiePrzesunac = false;
         switch(c){
             case 'U':
-                if(yZera!=0) swap(yZera,xZera, (byte) (yZera-1),xZera);
+                if(yZera!=0) 
+                {
+                    swap(yZera,xZera, (byte) (yZera-1),xZera);
+                    czyUdaloSiePrzesunac = true;
+                }
                 main.c("przesuniecie do gory");
                 break;
             case 'D':
-                if(yZera!=this.tab.length-1) swap(yZera,xZera, (byte) (yZera+1),xZera);
+                if(yZera!=this.tab.length-1) 
+                {
+                    swap(yZera,xZera, (byte) (yZera+1),xZera);
+                    czyUdaloSiePrzesunac = true;
+                }
                 main.c("przesuniecie do dolu");
                 break;
             case 'L':
-                if(xZera!=0) swap(yZera,xZera, yZera, (byte) (xZera-1));
+                if(xZera!=0) 
+                {
+                    swap(yZera,xZera, yZera, (byte) (xZera-1));
+                    czyUdaloSiePrzesunac = true;
+                }
                 main.c("przesuniecie do lewej");
                 break;
             case 'R':
-                if(xZera!=this.tab[yZera].length-1) swap(yZera,xZera, yZera, (byte) (xZera+1));
+                if(xZera!=this.tab[yZera].length-1) 
+                {
+                    swap(yZera,xZera, yZera, (byte) (xZera+1));
+                    czyUdaloSiePrzesunac = true;
+                }
                 main.c("przesuniecie do prawej");
                 break;
         }
+        main.c(this);
+        return czyUdaloSiePrzesunac;
     }
     
     private void swap(byte y1, byte x1, byte y2, byte x2)
