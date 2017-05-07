@@ -46,7 +46,6 @@ public class main {
         c("liczba wierszy: " + w);
         c("liczba kolumn: " + k);
         Uklad u = new Uklad(w, k);
-        
         for(byte i=0; i<w; i++)
         {
             for(byte j=0; j<k; j++)
@@ -56,15 +55,24 @@ public class main {
         }
         u.znajdzZero();
         
+        Uklad poprawny = new Uklad(w, k);
+        poprawny.wypelnijPoprawnie();
+        c(poprawny);
+        u.setPoprawny(poprawny.toString());
+        poprawny = null;
+        
         long czasStart, czasStop;
         c("");
         c(u);
         czasStart= System.nanoTime();
+            try {
+//                testPrzesuwania(u);
         DFS dfs;
             dfs = new DFS(u, strategia);
-            
-        czasStop = System.nanoTime();
-        c(((czasStop - czasStart)/1000)/1000.0); //nie "/1000000", bo wtedy nie byłoby części ułamkowej, a nie "/1000000.0" bo wtedy byłaby zbyt duza dokladnosc (wymagana jest dokladnosc 3 miejsc po przecinku)
+            } catch (Uklad.PoprawnyUkladException ex) {
+                czasStop = System.nanoTime();
+                c(((czasStop - czasStart)/1000)/1000.0); //nie "/1000000", bo wtedy nie byłoby części ułamkowej, a nie "/1000000.0" bo wtedy byłaby zbyt duza dokladnosc (wymagana jest dokladnosc 3 miejsc po przecinku)
+            }
     }
     
     public static void c(Object o)
@@ -93,23 +101,41 @@ public class main {
         
     }
     
-    private static void testPrzesuwania(Uklad u)
+    private static void testPrzesuwania(Uklad u) throws Uklad.PoprawnyUkladException
     {
         c(u);
+        u.przesun('L');
+        u.przesun('L');
+        u.przesun('D');
+        u.przesun('D');
         u.przesun('U');
         u.przesun('U');
         u.przesun('U');
         u.przesun('U');
+        u.przesun('R');
+        u.przesun('R');
+        u.przesun('R');
+        u.przesun('R');
         u.przesun('L');
         u.przesun('L');
         u.przesun('L');
-        u.przesun('R');
-        u.przesun('R');
-        u.przesun('R');
-        u.przesun('R');
+        u.przesun('L');
         u.przesun('D');
         u.przesun('D');
         u.przesun('D');
         u.przesun('D');
+        u.przesun('R');
+        u.przesun('R');
+        u.przesun('R');
+        u.przesun('R');
+        u.przesun('U');
+        u.przesun('U');
+        u.przesun('U');
+        u.przesun('R');
+        u.przesun('R');
+        u.przesun('R');
+        u.przesun('R');
+        u.przesun('L');
+        u.przesun('L');        
     }
 }
