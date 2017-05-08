@@ -31,18 +31,26 @@ public class DFS {
     private void przesuwanie() throws Uklad.PoprawnyUkladException
     {
         stos.push(this.u);
+        main.c(u);
         while(!stos.empty())
         {
             Uklad wierzcholek = stos.pop();
-            if(!listaOdwiedzonych.contains(wierzcholek))
+            main.c(wierzcholek);
+            if(!wierzcholek.czyOdwiedzony)
             {
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci(strategia);
-                listaOdwiedzonych.add(wierzcholek);
-                for(int i =0; i<dozwoloneRuchy.length(); i++)
+                main.c(dozwoloneRuchy);
+                wierzcholek.czyOdwiedzony = true;
+                for(int i = 0; i<dozwoloneRuchy.length(); i++)
                 {
-                    stos.push(new Uklad(u, dozwoloneRuchy.charAt(i)));
+                    main.c("uklad wyjściowy: "+System.lineSeparator()+wierzcholek);
+                    Uklad nowy = new Uklad(wierzcholek, dozwoloneRuchy.charAt(i));
+//                    stos.push(new Uklad(wierzcholek, dozwoloneRuchy.charAt(i)));
+                    main.c("nowy uklad: "+System.lineSeparator()+ nowy);
+                    main.c(dozwoloneRuchy);
                 }
             }
+            else main.c("wierzcholek juz odwiedzony");
         }
 //        String dozwoloneRuchy = u.jakieMozliwosci(strategia);
 //        if(listaOdwiedzonych.contains(this.toString())) return;

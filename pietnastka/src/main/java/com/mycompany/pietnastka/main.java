@@ -58,7 +58,7 @@ public class main {
         Uklad poprawny = new Uklad(w, k);
         poprawny.wypelnijPoprawnie();
         c(poprawny);
-        u.setPoprawny(poprawny.toString());
+        String poprawnyString = poprawny.toString();
         poprawny = null;
         
         long czasStart, czasStop;

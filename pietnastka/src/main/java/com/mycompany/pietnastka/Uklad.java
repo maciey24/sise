@@ -6,6 +6,7 @@
 package com.mycompany.pietnastka;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -14,10 +15,9 @@ import java.util.ArrayList;
 public class Uklad {
     private byte[][] tab;
     double ocena;
-    static int liczbaStanowOdwieczonych = 0;
-    static int liczbaStanowPrzetworzonych = 0;
-    byte yZera, xZera;
+    private byte yZera, xZera;
     private static String poprawny;
+    boolean czyOdwiedzony = false;
     
     public Uklad(byte w, byte k)
     {
@@ -27,11 +27,20 @@ public class Uklad {
     
     Uklad(Uklad u, char kier) throws PoprawnyUkladException
     {
+        main.c("kopiowany przed skopiowaniem:");
+        main.c(u);
         this.tab = u.tab.clone();
+
         this.ocena = u.ocena;
         this.yZera = u.yZera;
         this.xZera = u.xZera;
-        this.przesun(kier);
+        this.tab[2][2] = 99;
+//        this.przesun(kier);
+        
+        main.c("nowy uklad:");
+        System.out.println(this);
+        main.c("kopiowany uklad:");
+        main.c(u);
     }
     
     public void setLiczba(byte w, byte k, byte liczba)
@@ -89,7 +98,7 @@ public class Uklad {
     
     public boolean przesun(char c) throws PoprawnyUkladException
     {
-        main.c(this.jakieMozliwosci("RDUL"));
+//        main.c(this.jakieMozliwosci("RDUL"));
         boolean czyUdaloSiePrzesunac = false;
         switch(c){
             case 'U':
@@ -125,7 +134,7 @@ public class Uklad {
                 main.c("przesuniecie do prawej");
                 break;
         }
-        main.c(this);
+//        main.c(this);
         if(czyPoprawna()) throw new PoprawnyUkladException();
         return czyUdaloSiePrzesunac;
     }
@@ -157,6 +166,11 @@ public class Uklad {
         return this.toString().equals(poprawny);
     }
     
+    void setPoprawny(String popr)
+    {
+        Uklad.poprawny = popr;
+    }
+    
     void wypelnijPoprawnie()
     {
         for (byte i = 0; i<this.tab.length; i++)
@@ -167,11 +181,6 @@ public class Uklad {
             }
         }
         this.setLiczba((byte)(this.tab.length-1), (byte)(this.tab[0].length-1), (byte) 0);
-    }
-    
-    void setPoprawny(String popr)
-    {
-        Uklad.poprawny = popr;
     }
 
     static class PoprawnyUkladException extends Exception {
