@@ -15,14 +15,16 @@ import java.util.Stack;
 public class DFS {
     Uklad u;
     String strategia;
-    ArrayList<Uklad> listaOdwiedzonych;
+    ArrayList<String> listaOdwiedzonych;
     Stack<Uklad> stos;
+    String ciagRuchow;
     
     DFS(Uklad u, String strategia) throws Uklad.PoprawnyUkladException
     {
         this.u = u;
         this.strategia = strategia;
         listaOdwiedzonych = new ArrayList<>();
+        this.ciagRuchow = "";
 //        listaOdwiedzonych.add(u.toString());
         stos = new Stack();
         przesuwanie();
@@ -36,21 +38,28 @@ public class DFS {
         {
             Uklad wierzcholek = stos.pop();
             main.c(wierzcholek);
-            if(!wierzcholek.czyOdwiedzony)
+//            if(!wierzcholek.czyOdwiedzony)
+            if(!listaOdwiedzonych.contains(wierzcholek.toString()))
             {
+                ciagRuchow+=wierzcholek.literaUzytaDoStworzenia;
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci(strategia);
                 main.c(dozwoloneRuchy);
+                listaOdwiedzonych.add(wierzcholek.toString());
                 wierzcholek.czyOdwiedzony = true;
                 for(int i = 0; i<dozwoloneRuchy.length(); i++)
                 {
-                    main.c("uklad wyjściowy: "+System.lineSeparator()+wierzcholek);
-                    Uklad nowy = new Uklad(wierzcholek, dozwoloneRuchy.charAt(i));
-//                    stos.push(new Uklad(wierzcholek, dozwoloneRuchy.charAt(i)));
-                    main.c("nowy uklad: "+System.lineSeparator()+ nowy);
-                    main.c(dozwoloneRuchy);
+//                    main.c("uklad wyjściowy: "+System.lineSeparator()+wierzcholek);
+//                    Uklad nowy = new Uklad(wierzcholek, dozwoloneRuchy.charAt(i));
+                    stos.push(new Uklad(wierzcholek, dozwoloneRuchy.charAt(i)));
+//                    main.c("nowy uklad: "+System.lineSeparator()+ nowy);
+//                    main.c(nowy.jakieMozliwosci(strategia));
                 }
             }
-            else main.c("wierzcholek juz odwiedzony");
+            else 
+            {
+                ciagRuchow = ciagRuchow.substring(0, ciagRuchow.length());
+                main.c("wierzcholek juz odwiedzony");
+            }
         }
 //        String dozwoloneRuchy = u.jakieMozliwosci(strategia);
 //        if(listaOdwiedzonych.contains(this.toString())) return;

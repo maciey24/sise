@@ -18,6 +18,8 @@ public class Uklad {
     private byte yZera, xZera;
     private static String poprawny;
     boolean czyOdwiedzony = false;
+    static String ciagRuchow = "";
+    char literaUzytaDoStworzenia;
     
     public Uklad(byte w, byte k)
     {
@@ -27,20 +29,27 @@ public class Uklad {
     
     Uklad(Uklad u, char kier) throws PoprawnyUkladException
     {
-        main.c("kopiowany przed skopiowaniem:");
-        main.c(u);
-        this.tab = u.tab.clone();
-
+//        main.c("kopiowany przed skopiowaniem:");
+//        main.c(u);
+        this.tab = new byte[u.tab.length][u.tab[0].length];
+        for(int i =0; i<this.tab.length; i++)
+        {
+            this.tab[i] = Arrays.copyOf(u.tab[i], this.tab[i].length);
+        }
+//        this.tab = Arrays.copyOf(tab, u.tab.length);
         this.ocena = u.ocena;
         this.yZera = u.yZera;
         this.xZera = u.xZera;
-        this.tab[2][2] = 99;
-//        this.przesun(kier);
-        
-        main.c("nowy uklad:");
-        System.out.println(this);
-        main.c("kopiowany uklad:");
-        main.c(u);
+        this.czyOdwiedzony = false;
+        this.przesun(kier);
+        Uklad.ciagRuchow += kier;
+        literaUzytaDoStworzenia = kier;
+//        this.tab[2][2] = 99;
+//        
+//        main.c("nowy uklad:");
+//        System.out.println(this);
+//        main.c("kopiowany uklad:");
+//        main.c(u);
     }
     
     public void setLiczba(byte w, byte k, byte liczba)
@@ -76,7 +85,7 @@ public class Uklad {
 //                    main.c(i + " "+ j);
                     this.yZera=i;
                     this.xZera=j;
-                    main.c(yZera + " "+ xZera);
+                    main.c("współrzędne zera: " + yZera + " "+ xZera);
                 }
             }
         }
@@ -135,7 +144,11 @@ public class Uklad {
                 break;
         }
 //        main.c(this);
-        if(czyPoprawna()) throw new PoprawnyUkladException();
+        if(czyPoprawna())
+        {
+//            main.c("poprawny");
+            throw new PoprawnyUkladException();
+        }
         return czyUdaloSiePrzesunac;
     }
     
@@ -163,6 +176,8 @@ public class Uklad {
 //        main.c("test poprawnosci:");
 //        main.c(this.toString());
 //        main.c(poprawny);
+//        main.c("ten układ: " + System.lineSeparator() + this);
+//        main.c("poprawny: " + System.lineSeparator() + poprawny);
         return this.toString().equals(poprawny);
     }
     

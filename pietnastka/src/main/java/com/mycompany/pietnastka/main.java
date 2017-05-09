@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.ir.Symbol;
 //dfs LUDR "..\dodatki\\uklady\4x4_05_00054.txt" 4x4_01_0001_dfs_ludr_sol.txt 4x4_01_0001_dfs_ludr_stats.txt
 /**
  *
@@ -57,20 +58,20 @@ public class main {
         
         Uklad poprawny = new Uklad(w, k);
         poprawny.wypelnijPoprawnie();
-        c(poprawny);
+        c("poprawny układ :" + System.lineSeparator()+poprawny);
         String poprawnyString = poprawny.toString();
+        u.setPoprawny(poprawnyString);
         poprawny = null;
         
-        long czasStart, czasStop;
-        c("");
-        c(u);
-        czasStart= System.nanoTime();
+        long czasStart = System.nanoTime(), czasStop;
             try {
-//                testPrzesuwania(u);
         DFS dfs;
+        czasStart= System.nanoTime();
             dfs = new DFS(u, strategia);
+//                testPrzesuwania(u);
             } catch (Uklad.PoprawnyUkladException ex) {
                 czasStop = System.nanoTime();
+                c(Uklad.ciagRuchow);
                 c(((czasStop - czasStart)/1000)/1000.0); //nie "/1000000", bo wtedy nie byłoby części ułamkowej, a nie "/1000000.0" bo wtedy byłaby zbyt duza dokladnosc (wymagana jest dokladnosc 3 miejsc po przecinku)
             }
     }
