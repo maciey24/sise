@@ -18,16 +18,21 @@ public class Uklad {
     private byte yZera, xZera;
     private static String poprawny;
     boolean czyOdwiedzony = false;
-    static String ciagRuchow = "";
-    char literaUzytaDoStworzenia;
+    static long liczbaStanowPrzetworzonych = 0;
+    static long liczbaStanowOdwiedzonych = 0;
+    static long maxGlebokosc = 0;
+//    static String ciagRuchow = "";
+    String sciezkaDoWezla;
     
     public Uklad(byte w, byte k)
     {
         this.tab = new byte[w][k];
         this.ocena = 1.0;
+        this.sciezkaDoWezla = "";
+        liczbaStanowPrzetworzonych++;
     }
     
-    Uklad(Uklad u, char kier) throws PoprawnyUkladException
+    Uklad(Uklad u, String sciezkaDoNadrzednegoWezla, char kier) throws PoprawnyUkladException
     {
 //        main.c("kopiowany przed skopiowaniem:");
 //        main.c(u);
@@ -42,8 +47,10 @@ public class Uklad {
         this.xZera = u.xZera;
         this.czyOdwiedzony = false;
         this.przesun(kier);
-        Uklad.ciagRuchow += kier;
-        literaUzytaDoStworzenia = kier;
+//        Uklad.ciagRuchow += kier;
+        sciezkaDoWezla = sciezkaDoNadrzednegoWezla + kier;
+        if(this.sciezkaDoWezla.length()>maxGlebokosc) maxGlebokosc = this.sciezkaDoWezla.length();
+        liczbaStanowPrzetworzonych++;
 //        this.tab[2][2] = 99;
 //        
 //        main.c("nowy uklad:");
@@ -144,11 +151,6 @@ public class Uklad {
                 break;
         }
 //        main.c(this);
-        if(czyPoprawna())
-        {
-//            main.c("poprawny");
-            throw new PoprawnyUkladException();
-        }
         return czyUdaloSiePrzesunac;
     }
     
@@ -171,7 +173,7 @@ public class Uklad {
         return this.toString().equals(ukl.toString());
     }
     
-    private boolean czyPoprawna()
+    public boolean czyPoprawna()
     {
 //        main.c("test poprawnosci:");
 //        main.c(this.toString());
@@ -200,7 +202,16 @@ public class Uklad {
 
     static class PoprawnyUkladException extends Exception {
 
-        public PoprawnyUkladException() {
+        private final String sciezka;
+
+        public PoprawnyUkladException(String sciezka) {
+            this.sciezka = sciezka;
+        }
+        
+        @Override
+        public String toString()
+        {
+            return sciezka;
         }
     }
     

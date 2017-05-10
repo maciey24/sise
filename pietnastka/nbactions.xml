@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath com.mycompany.pietnastka.main dfs LUDR "..\dodatki\uklady\3x3_02_00003.txt" 4x4_01_0001_dfs_ludr_sol.txt 4x4_01_0001_dfs_ludr_stats.txt</exec.args>
+                <exec.args>-classpath %classpath com.mycompany.pietnastka.main dfs LURD "..\dodatki\uklady\3x3_05_00004.txt" ..\dodatki\wyniki\3x3_05_00004_dfs_durl_sol.txt ..\dodatki\wyniki\3x3_05_00004_dfs_durl_stats.txt</exec.args>
                 <exec.executable>java</exec.executable>
                 <exec.workingdir>C:\Users\maciek\programy\sise\pietnastka\target</exec.workingdir>
             </properties>
@@ -25,7 +25,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath com.mycompany.pietnastka.main dfs LUDR "..\dodatki\uklady\3x3_02_00003.txt" 4x4_01_0001_dfs_ludr_sol.txt 4x4_01_0001_dfs_ludr_stats.txt</exec.args>
+                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath com.mycompany.pietnastka.main dfs LURD "..\dodatki\uklady\3x3_05_00004.txt" ..\dodatki\wyniki\3x3_05_00004_dfs_durl_sol.txt ..\dodatki\wyniki\3x3_05_00004_dfs_durl_stats.txt</exec.args>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
                 <exec.workingdir>C:\Users\maciek\programy\sise\pietnastka\target</exec.workingdir>
@@ -41,7 +41,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath com.mycompany.pietnastka.main dfs LUDR "..\dodatki\uklady\3x3_02_00003.txt" 4x4_01_0001_dfs_ludr_sol.txt 4x4_01_0001_dfs_ludr_stats.txt</exec.args>
+                <exec.args>-classpath %classpath com.mycompany.pietnastka.main dfs LURD "..\dodatki\uklady\3x3_05_00004.txt" ..\dodatki\wyniki\3x3_05_00004_dfs_durl_sol.txt ..\dodatki\wyniki\3x3_05_00004_dfs_durl_stats.txt</exec.args>
                 <exec.executable>java</exec.executable>
                 <exec.workingdir>C:\Users\maciek\programy\sise\pietnastka\target</exec.workingdir>
             </properties>
