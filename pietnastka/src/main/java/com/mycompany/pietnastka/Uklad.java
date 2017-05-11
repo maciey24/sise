@@ -17,7 +17,6 @@ public class Uklad {
     double ocena;
     private byte yZera, xZera;
     private static String poprawny;
-    boolean czyOdwiedzony = false;
     static long liczbaStanowPrzetworzonych = 0;
     static long liczbaStanowOdwiedzonych = 0;
     static long maxGlebokosc = 0;
@@ -45,7 +44,6 @@ public class Uklad {
         this.ocena = u.ocena;
         this.yZera = u.yZera;
         this.xZera = u.xZera;
-        this.czyOdwiedzony = false;
         this.przesun(kier);
 //        Uklad.ciagRuchow += kier;
         sciezkaDoWezla = sciezkaDoNadrzednegoWezla + kier;

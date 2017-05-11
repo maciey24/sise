@@ -1,4 +1,7 @@
 *.class
+*.txt
+*.docx
+pietnastka/nbactions.xml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
