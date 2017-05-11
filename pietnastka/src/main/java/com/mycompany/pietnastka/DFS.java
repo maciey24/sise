@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.pietnastka;
 
 import java.util.ArrayList;
@@ -12,25 +7,19 @@ import java.util.Stack;
  *
  * @author maciek
  */
-public class DFS {
-    Uklad u;
-    String strategia;
-    ArrayList<String> listaOdwiedzonych;
+public final class DFS extends Algorytm {
+    
     Stack<Uklad> stos;
-//    String ciagRuchow;
     
     DFS(Uklad u, String strategia) throws Uklad.PoprawnyUkladException
     {
-        this.u = u;
-        this.strategia = strategia;
-        listaOdwiedzonych = new ArrayList<>();
-//        this.ciagRuchow = "";
-//        listaOdwiedzonych.add(u.toString());
+        super(u, strategia);
         stos = new Stack();
         przesuwanie();
     }
     
-    private void przesuwanie() throws Uklad.PoprawnyUkladException
+    @Override
+    void przesuwanie() throws Uklad.PoprawnyUkladException
     {
         stos.push(this.u);
 //        main.c(u);
@@ -42,7 +31,7 @@ public class DFS {
                 wierzcholek = stos.pop();
             }
             Uklad.liczbaStanowOdwiedzonych++;
-            main.c(wierzcholek);
+//            main.c(wierzcholek);
 //            if(!wierzcholek.czyOdwiedzony)
             if(!listaOdwiedzonych.contains(wierzcholek.toString()))
             {
@@ -51,13 +40,12 @@ public class DFS {
             //            main.c("poprawny");
                     throw new Uklad.PoprawnyUkladException(wierzcholek.sciezkaDoWezla);
                 }
-                main.c(wierzcholek.sciezkaDoWezla);
+//                main.c(wierzcholek.sciezkaDoWezla);
 //                main.c("litera uzyta :"+ wierzcholek.literaUzytaDoStworzenia);
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci(strategia);
-                main.c(dozwoloneRuchy);
+//                main.c(dozwoloneRuchy);
                 listaOdwiedzonych.add(wierzcholek.toString());
 
-                wierzcholek.czyOdwiedzony = true;
                 for(int i = 0; i<dozwoloneRuchy.length(); i++)
                 {
 //                    main.c("uklad wyjściowy: "+System.lineSeparator()+wierzcholek);
@@ -70,7 +58,7 @@ public class DFS {
             else 
             {       
 //                ciagRuchow = ciagRuchow.substring(0, ciagRuchow.length());
-                main.c("wierzcholek juz odwiedzony");
+//                main.c("wierzcholek juz odwiedzony");
             }
         }
 //        String dozwoloneRuchy = u.jakieMozliwosci(strategia);

@@ -5,58 +5,65 @@
  */
 package com.mycompany.pietnastka;
 
+import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  *
  * @author maciek
  */
-public class Uklad {
+public class Uklad implements Comparable<Uklad>{
     private byte[][] tab;
-    double ocena;
+    int odleglosc;
     private byte yZera, xZera;
     private static String poprawny;
-    boolean czyOdwiedzony = false;
     static long liczbaStanowPrzetworzonych = 0;
     static long liczbaStanowOdwiedzonych = 0;
     static long maxGlebokosc = 0;
-//    static String ciagRuchow = "";
     String sciezkaDoWezla;
     
     public Uklad(byte w, byte k)
     {
         this.tab = new byte[w][k];
-        this.ocena = 1.0;
+        this.odleglosc = 1;
         this.sciezkaDoWezla = "";
         liczbaStanowPrzetworzonych++;
     }
     
     Uklad(Uklad u, String sciezkaDoNadrzednegoWezla, char kier) throws PoprawnyUkladException
     {
-//        main.c("kopiowany przed skopiowaniem:");
-//        main.c(u);
         this.tab = new byte[u.tab.length][u.tab[0].length];
         for(int i =0; i<this.tab.length; i++)
         {
             this.tab[i] = Arrays.copyOf(u.tab[i], this.tab[i].length);
         }
-//        this.tab = Arrays.copyOf(tab, u.tab.length);
-        this.ocena = u.ocena;
+        this.odleglosc = u.odleglosc;
         this.yZera = u.yZera;
         this.xZera = u.xZera;
-        this.czyOdwiedzony = false;
         this.przesun(kier);
-//        Uklad.ciagRuchow += kier;
         sciezkaDoWezla = sciezkaDoNadrzednegoWezla + kier;
         if(this.sciezkaDoWezla.length()>maxGlebokosc) maxGlebokosc = this.sciezkaDoWezla.length();
         liczbaStanowPrzetworzonych++;
-//        this.tab[2][2] = 99;
-//        
-//        main.c("nowy uklad:");
-//        System.out.println(this);
-//        main.c("kopiowany uklad:");
-//        main.c(u);
+    }
+    
+    Uklad(Uklad u, String sciezkaDoNadrzednegoWezla, char kier, String metryka) throws PoprawnyUkladException
+    {
+        this.tab = new byte[u.tab.length][u.tab[0].length];
+        for(int i =0; i<this.tab.length; i++)
+        {
+            this.tab[i] = Arrays.copyOf(u.tab[i], this.tab[i].length);
+        }
+        this.odleglosc = u.odleglosc;
+        this.yZera = u.yZera;
+        this.xZera = u.xZera;
+        this.przesun(kier);
+        sciezkaDoWezla = sciezkaDoNadrzednegoWezla + kier;
+        if(this.sciezkaDoWezla.length()>maxGlebokosc) maxGlebokosc = this.sciezkaDoWezla.length();
+        liczbaStanowPrzetworzonych++;
+        if(metryka.equals("manh")) this.obliczOdlManh();
+        else if(metryka.equals("hamm")) this.obliczOdlHamm();
     }
     
     public void setLiczba(byte w, byte k, byte liczba)
@@ -92,7 +99,7 @@ public class Uklad {
 //                    main.c(i + " "+ j);
                     this.yZera=i;
                     this.xZera=j;
-                    main.c("współrzędne zera: " + yZera + " "+ xZera);
+//                    main.c("współrzędne zera: " + yZera + " "+ xZera);
                 }
             }
         }
@@ -123,7 +130,7 @@ public class Uklad {
                     swap(yZera,xZera, (byte) (yZera-1),xZera);
                     czyUdaloSiePrzesunac = true;
                 }
-                main.c("przesuniecie do gory");
+//                main.c("przesuniecie do gory");
                 break;
             case 'D':
                 if(yZera!=this.tab.length-1) 
@@ -131,7 +138,7 @@ public class Uklad {
                     swap(yZera,xZera, (byte) (yZera+1),xZera);
                     czyUdaloSiePrzesunac = true;
                 }
-                main.c("przesuniecie do dolu");
+//                main.c("przesuniecie do dolu");
                 break;
             case 'L':
                 if(xZera!=0) 
@@ -139,7 +146,7 @@ public class Uklad {
                     swap(yZera,xZera, yZera, (byte) (xZera-1));
                     czyUdaloSiePrzesunac = true;
                 }
-                main.c("przesuniecie do lewej");
+//                main.c("przesuniecie do lewej");
                 break;
             case 'R':
                 if(xZera!=this.tab[yZera].length-1) 
@@ -147,7 +154,7 @@ public class Uklad {
                     swap(yZera,xZera, yZera, (byte) (xZera+1));
                     czyUdaloSiePrzesunac = true;
                 }
-                main.c("przesuniecie do prawej");
+//                main.c("przesuniecie do prawej");
                 break;
         }
 //        main.c(this);
@@ -165,7 +172,6 @@ public class Uklad {
 //        main.c(getLiczba(y2, x2));
         yZera = y2;
         xZera= x2;
-        
     }
     
     private boolean czyIdentyczne(Uklad ukl)
@@ -175,11 +181,8 @@ public class Uklad {
     
     public boolean czyPoprawna()
     {
-//        main.c("test poprawnosci:");
-//        main.c(this.toString());
-//        main.c(poprawny);
-//        main.c("ten układ: " + System.lineSeparator() + this);
-//        main.c("poprawny: " + System.lineSeparator() + poprawny);
+        if(this.xZera!=this.tab[0].length-1) return false;
+        if(this.yZera!=this.tab.length-1) return false;
         return this.toString().equals(poprawny);
     }
     
@@ -198,6 +201,52 @@ public class Uklad {
             }
         }
         this.setLiczba((byte)(this.tab.length-1), (byte)(this.tab[0].length-1), (byte) 0);
+    }
+    
+//Returns a negative integer, zero, or a positive integer 
+//    as this object is less than, equal to, or greater 
+//    than the specified object.
+    @Override
+    public int compareTo(Uklad o) {
+        return this.odleglosc - o.odleglosc;
+    }
+
+    private void obliczOdlManh() {
+        this.odleglosc = 0;
+        for (byte i = 0; i<this.tab.length; i++)
+        {
+            for(byte j = 0; j<this.tab[i].length; j++)
+            {
+                this.odleglosc+=odlegloscDoPoprawnegoMiejsca(this.tab[i][j], i, j);
+            }
+        }
+    }
+    
+    private int odlegloscDoPoprawnegoMiejsca(byte liczba, byte x, byte y)
+    {
+        for (byte i = 0; i<main.poprawny.tab.length; i++)
+        {
+            for(byte j = 0; j<main.poprawny.tab[i].length; j++)
+            {
+                if(main.poprawny.tab[i][j] == liczba)
+                {
+//                    main.c(abs(i-x)+abs(j-y));
+                    return abs(i-x)+abs(j-y);}
+            }
+        }
+        return 0;
+    }
+
+    private void obliczOdlHamm() {
+        this.odleglosc = 0;
+        for (byte i = 0; i<this.tab.length; i++)
+        {
+            for(byte j = 0; j<this.tab[i].length; j++)
+            {
+                if(this.tab[i][j]!=main.poprawny.tab[i][j])
+                    this.odleglosc++;
+            }
+        }
     }
 
     static class PoprawnyUkladException extends Exception {
