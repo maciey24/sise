@@ -150,7 +150,7 @@ public class main {
 //(przy czym gdy program nie znalazł rozwiązania, wartość ta to -1);
 //2 linia (liczba całkowita): liczbę stanów odwiedzonych;
 //3 linia (liczba całkowita): liczbę stanów przetworzonych;
-//4 linia (liczba całkowita): maksymalną osiągniętą głębokość rekursji;
+//4 linia (liczba całkowita): maksymalną osiągniętą D rekursji;
 //5 linia (liczba rzeczywista z dokładnością do 3 miejsc po przecinku): 
 //czas trwania procesu obliczeniowego w milisekundach.
 
