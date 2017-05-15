@@ -18,28 +18,33 @@ public class BFS extends Algorytm {
     }
 
     @Override
-    void przesuwanie() throws Uklad.PoprawnyUkladException {
+    void przesuwanie() throws Uklad.PoprawnyUkladException 
+    {
         kolejka.add(this.u);
-        while (!kolejka.isEmpty()) {
+        while (!kolejka.isEmpty()) 
+        {
             Uklad wierzcholek = kolejka.poll();
             Uklad.liczbaStanowOdwiedzonych++;
 //            main.c(wierzcholek);
-            if (!listaOdwiedzonych.contains(wierzcholek.toString())) {
+            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))
+            {
                 if (wierzcholek.czyPoprawna()) {
                     throw new Uklad.PoprawnyUkladException(wierzcholek.sciezkaDoWezla);
                 }
 //                main.c(wierzcholek.sciezkaDoWezla);
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci(strategia);
 //                main.c(dozwoloneRuchy);
-                listaOdwiedzonych.add(wierzcholek.toString());
+                listaOdwiedzonych.put(wierzcholek.toString(), null);
 
                 for (int i = 0; i < dozwoloneRuchy.length(); i++) {
                     kolejka.add(new Uklad(wierzcholek, wierzcholek.sciezkaDoWezla, dozwoloneRuchy.charAt(i)));
                 }
-            } else {
-//                main.c("wierzcholek juz odwiedzony");
+            }
+            else 
+            {
+    //            main.c("wierzcholek juz odwiedzony");
             }
         }
+    
     }
-
 }

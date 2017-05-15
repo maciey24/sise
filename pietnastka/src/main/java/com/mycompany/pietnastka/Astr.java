@@ -39,7 +39,7 @@ public class Astr extends Algorytm{
             Uklad.liczbaStanowOdwiedzonych++;
 //            main.c(wierzcholek.odleglosc);
 //            main.c(wierzcholek);
-            if(!listaOdwiedzonych.contains(wierzcholek.toString()))
+            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))
             {
                 if(wierzcholek.czyPoprawna())
                 {
@@ -48,7 +48,7 @@ public class Astr extends Algorytm{
 //                main.c(wierzcholek.sciezkaDoWezla);
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci("LURD");
 //                main.c(dozwoloneRuchy);
-                listaOdwiedzonych.add(wierzcholek.toString());
+                listaOdwiedzonych.put(wierzcholek.toString(), null);
                 
                 ArrayList<Uklad> doDodania = new ArrayList<>();
                 for(int i = 0; i<dozwoloneRuchy.length(); i++)

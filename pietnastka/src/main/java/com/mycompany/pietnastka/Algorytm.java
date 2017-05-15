@@ -6,6 +6,7 @@
 package com.mycompany.pietnastka;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 /**
@@ -16,12 +17,12 @@ public abstract class Algorytm {
 
     Uklad u;
     String strategia;
-    ArrayList<String> listaOdwiedzonych;  
+    HashMap<String, Object> listaOdwiedzonych;  
 
     Algorytm(Uklad u, String strategia) throws Uklad.PoprawnyUkladException {
         this.u = u;
         this.strategia = strategia;
-        listaOdwiedzonych = new ArrayList<>();
+        listaOdwiedzonych = new HashMap<>();
     }
 
     abstract void przesuwanie() throws Uklad.PoprawnyUkladException;

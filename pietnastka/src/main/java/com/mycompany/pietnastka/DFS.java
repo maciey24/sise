@@ -26,14 +26,14 @@ public final class DFS extends Algorytm {
         while(!stos.empty())
         {
             Uklad wierzcholek = stos.pop();
-            while(wierzcholek.sciezkaDoWezla.length()>=main.maksymalnaDozwolonaGlebokoscRekursji)
-            {
-                wierzcholek = stos.pop();
-            }
+//            while(wierzcholek.sciezkaDoWezla.length()>=main.maksymalnaDozwolonaGlebokoscRekursji)
+//            {
+//                wierzcholek = stos.pop();
+//            }
             Uklad.liczbaStanowOdwiedzonych++;
 //            main.c(wierzcholek);
 //            if(!wierzcholek.czyOdwiedzony)
-            if(!listaOdwiedzonych.contains(wierzcholek.toString()))
+            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))
             {
                 if(wierzcholek.czyPoprawna())
                 {
@@ -44,17 +44,20 @@ public final class DFS extends Algorytm {
 //                main.c("litera uzyta :"+ wierzcholek.literaUzytaDoStworzenia);
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci(strategia);
 //                main.c(dozwoloneRuchy);
-                listaOdwiedzonych.add(wierzcholek.toString());
+                listaOdwiedzonych.put(wierzcholek.toString(), null);
 
-                for(int i = 0; i<dozwoloneRuchy.length(); i++)
-                {
-//                    main.c("uklad wyjściowy: "+System.lineSeparator()+wierzcholek);
-//                    Uklad nowy = new Uklad(wierzcholek, dozwoloneRuchy.charAt(i));
-                    stos.push(new Uklad(wierzcholek, wierzcholek.sciezkaDoWezla, dozwoloneRuchy.charAt(i)));
-//                    main.c("nowy uklad: "+System.lineSeparator()+ nowy);
-//                    main.c(nowy.jakieMozliwosci(strategia));
+                    if(wierzcholek.sciezkaDoWezla.length()<=main.maksymalnaDozwolonaGlebokoscRekursji)
+                    {
+                        for(int i = 0; i<dozwoloneRuchy.length(); i++)
+                        {
+            //                    main.c("uklad wyjściowy: "+System.lineSeparator()+wierzcholek);
+            //                    Uklad nowy = new Uklad(wierzcholek, dozwoloneRuchy.charAt(i));
+                            stos.push(new Uklad(wierzcholek, wierzcholek.sciezkaDoWezla, dozwoloneRuchy.charAt(i)));
+            //                    main.c("nowy uklad: "+System.lineSeparator()+ nowy);
+            //                    main.c(nowy.jakieMozliwosci(strategia));
+                        }
+                    }
                 }
-            }
             else 
             {       
 //                ciagRuchow = ciagRuchow.substring(0, ciagRuchow.length());
