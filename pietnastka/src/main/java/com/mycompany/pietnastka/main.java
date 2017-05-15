@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class main {
 
     static boolean debug = false;
-    static int maksymalnaDozwolonaGlebokoscRekursji = 30;
+    static int maksymalnaDozwolonaGlebokoscRekursji = 20;
     static Uklad poprawny;
 //        static String ciagRuchow;
 
