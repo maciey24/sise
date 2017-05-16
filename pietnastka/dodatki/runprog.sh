@@ -18,7 +18,8 @@
 #  progname="java /home/user/15puzzle/bin/solver" (Java class)
 #  progname="java -jar /home/user/15puzzle/bin/solver.jar" (executable jar file)
 
-progname="java -jar ../target/pietnastka-1.0-SNAPSHOT.jar"
+progname="java -jar ../../target/pietnastka-1.0-SNAPSHOT.jar"
+cd uklady
 orders=(RDUL RDLU DRUL DRLU LUDR LURD ULDR ULRD)
 heuristics=(hamm manh)
 filename_regex="^[a-zA-Z0-9]+_[0-9]+_[0-9]+.txt$"

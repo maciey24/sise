@@ -26,24 +26,24 @@ public class BFS extends Algorytm {
             Uklad wierzcholek = kolejka.poll();
             Uklad.liczbaStanowOdwiedzonych++;
 //            main.c(wierzcholek);
-            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))
-            {
+//            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))
+//            {
                 if (wierzcholek.czyPoprawna()) {
                     throw new Uklad.PoprawnyUkladException(wierzcholek.sciezkaDoWezla);
                 }
 //                main.c(wierzcholek.sciezkaDoWezla);
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci(strategia);
 //                main.c(dozwoloneRuchy);
-                listaOdwiedzonych.put(wierzcholek.toString(), null);
+//                listaOdwiedzonych.put(wierzcholek.toString(), null);
 
                 for (int i = 0; i < dozwoloneRuchy.length(); i++) {
                     kolejka.add(new Uklad(wierzcholek, wierzcholek.sciezkaDoWezla, dozwoloneRuchy.charAt(i)));
                 }
-            }
-            else 
-            {
-    //            main.c("wierzcholek juz odwiedzony");
-            }
+//            }
+//            else 
+//            {
+//    //            main.c("wierzcholek juz odwiedzony");
+//            }
         }
     
     }

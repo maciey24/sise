@@ -11,7 +11,7 @@
 #  4x4_01_0001_bfs_rdul_stats.txt
 
 filename_regex="^[a-zA-Z0-9]+_[0-9]+_[0-9]+_[a-zA-Z]+_[a-zA-Z]+_stats.txt$"
-
+cd uklady
 for filename in *; do
     if [[ -f "$filename" && "$filename" =~ $filename_regex ]]; then
         line=$(echo "$filename" | \

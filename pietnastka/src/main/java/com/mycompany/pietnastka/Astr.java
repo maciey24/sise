@@ -32,15 +32,15 @@ public class Astr extends Algorytm{
         while(!stos.empty())
         {
             Uklad wierzcholek = stos.pop();
-            while(wierzcholek.sciezkaDoWezla.length()>=main.maksymalnaDozwolonaGlebokoscRekursji)
-            {
-                wierzcholek = stos.pop();
-            }
+//            while(wierzcholek.sciezkaDoWezla.length()>=main.maksymalnaDozwolonaGlebokoscRekursji)
+//            {
+//                wierzcholek = stos.pop();
+//            }
             Uklad.liczbaStanowOdwiedzonych++;
 //            main.c(wierzcholek.odleglosc);
 //            main.c(wierzcholek);
-            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))
-            {
+//            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))
+//            {
                 if(wierzcholek.czyPoprawna())
                 {
                     throw new Uklad.PoprawnyUkladException(wierzcholek.sciezkaDoWezla);
@@ -48,24 +48,27 @@ public class Astr extends Algorytm{
 //                main.c(wierzcholek.sciezkaDoWezla);
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci("LURD");
 //                main.c(dozwoloneRuchy);
-                listaOdwiedzonych.put(wierzcholek.toString(), null);
+//                listaOdwiedzonych.put(wierzcholek.toString(), null);
                 
-                ArrayList<Uklad> doDodania = new ArrayList<>();
-                for(int i = 0; i<dozwoloneRuchy.length(); i++)
+                if(wierzcholek.sciezkaDoWezla.length()<=main.maksymalnaDozwolonaGlebokoscRekursji)
                 {
-                    doDodania.add(new Uklad(wierzcholek, wierzcholek.sciezkaDoWezla, dozwoloneRuchy.charAt(i), strategia));
+                    ArrayList<Uklad> doDodania = new ArrayList<>();
+                    for(int i = 0; i<dozwoloneRuchy.length(); i++)
+                    {
+                        doDodania.add(new Uklad(wierzcholek, wierzcholek.sciezkaDoWezla, dozwoloneRuchy.charAt(i), strategia));
+                    }
+                    Collections.sort(doDodania);
+                    Collections.reverse(doDodania);
+                    for(Uklad u : doDodania)
+                    {
+                        stos.push(u);
+                    }
                 }
-                Collections.sort(doDodania);
-                Collections.reverse(doDodania);
-                for(Uklad u : doDodania)
-                {
-                    stos.push(u);
-                }
-            }
-            else 
-            {       
-//                main.c("wierzcholek juz odwiedzony");
-            }
+//            }
+//            else 
+//            {       
+////                main.c("wierzcholek juz odwiedzony");
+//            }
         }
     }
 }

@@ -31,64 +31,31 @@ public final class DFS extends Algorytm {
 //                wierzcholek = stos.pop();
 //            }
             Uklad.liczbaStanowOdwiedzonych++;
-//            main.c(wierzcholek);
-//            if(!wierzcholek.czyOdwiedzony)
-            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))
-            {
+//            if(!listaOdwiedzonych.containsKey(wierzcholek.toString()))//&&wierzcholek.sciezkaDoWezla.length()<main.maksymalnaDozwolonaGlebokoscRekursji)
+//            {
                 if(wierzcholek.czyPoprawna())
                 {
-            //            main.c("poprawny");
                     throw new Uklad.PoprawnyUkladException(wierzcholek.sciezkaDoWezla);
                 }
-//                main.c(wierzcholek.sciezkaDoWezla);
-//                main.c("litera uzyta :"+ wierzcholek.literaUzytaDoStworzenia);
                 String dozwoloneRuchy = wierzcholek.jakieMozliwosci(strategia);
-//                main.c(dozwoloneRuchy);
-                listaOdwiedzonych.put(wierzcholek.toString(), null);
+//                listaOdwiedzonych.put(wierzcholek.toString(), null);
 
-                    if(wierzcholek.sciezkaDoWezla.length()<=main.maksymalnaDozwolonaGlebokoscRekursji)
+                    if(wierzcholek.sciezkaDoWezla.length()<=main.maksymalnaDozwolonaGlebokoscRekursji-1)
                     {
                         for(int i = 0; i<dozwoloneRuchy.length(); i++)
                         {
-            //                    main.c("uklad wyjściowy: "+System.lineSeparator()+wierzcholek);
-            //                    Uklad nowy = new Uklad(wierzcholek, dozwoloneRuchy.charAt(i));
                             stos.push(new Uklad(wierzcholek, wierzcholek.sciezkaDoWezla, dozwoloneRuchy.charAt(i)));
-            //                    main.c("nowy uklad: "+System.lineSeparator()+ nowy);
-            //                    main.c(nowy.jakieMozliwosci(strategia));
                         }
                     }
-                }
-            else 
-            {       
-//                ciagRuchow = ciagRuchow.substring(0, ciagRuchow.length());
-//                main.c("wierzcholek juz odwiedzony");
-            }
+                    else
+                    {
+                        
+                    }
+//            }
+//            else 
+//            {       
+////                main.c("wierzcholek juz odwiedzony");
+//            }
         }
-//        String dozwoloneRuchy = u.jakieMozliwosci(strategia);
-//        if(listaOdwiedzonych.contains(this.toString())) return;
-//        for(int i = 0; i<dozwoloneRuchy.length(); i++)
-//        {
-//            przesuwanie();
-//        }
-//        stos.push(dozwoloneRuchy.substring(0, 1));
-//        while(!stos.empty())
-//        {
-//            //czy to jest wynik
-//            //czy już jest ten węzeł odwiedzony
-//            stack.push(curentElement.ruchWGore);
-//            stack.push(currentElement.ruchWDol);
-//            ...
-//        }
-
-//        let S be a stack
-//      S.push(v)
-//      while S is not empty
-//          v = S.pop()
-//          if v is not labeled as discovered:
-//              label v as discovered
-//              for all edges from v to w in G.adjacentEdges(v) do 
-//                  S.push(w)
-
-
     }
 }
