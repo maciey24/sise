@@ -1,0 +1,6 @@
+Zadanie 2: Sieæ neuronowa - instrukcja
+Napisaæ program implementuj¹cy sieæ neuronow¹ typu wielowarstwowy perceptron, nauczan¹ metod¹ wstecznej propagacji b³êdu.
+Sieæ neuronowa ma nauczyæ siê obliczania pierwiastka drugiego stopnia liczby.
+Sieæ neuronow¹ nale¿y nauczyæ przy u¿yciu wejœciowego wektora liczb losowych z zakresu 1-100.
+
+Ostatnia modyfikacja: pi¹tek, 17 lutego 2017, 15:05
