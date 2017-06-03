@@ -15,3 +15,7 @@ pietnastka/nbactions.xml
 hs_err_pid*
 /pietnastka/target/
 /pietnastka/nbactions.xml
+/iad/nbproject/private/
+/siecs/nbproject/private/
+/siecs/build/
+/siecs/dist/
