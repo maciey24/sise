@@ -3,15 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/XYLineChart_AWT.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/dao.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/NeuralNetwork.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/Neuron.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/BiasedNeuron.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/SigmoidFunction.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/Main.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/GaussianFunction.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/IFunction.java</file>
             <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/LinearFunction.java</file>
             <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/OutputNeuron.java</file>
             <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/Point.java</file>
-            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/dao.java</file>
-            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/NeuralNetwork.java</file>
             <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/Task2_Approximation.java</file>
-            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/Neuron.java</file>
-            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/SigmoidFunction.java</file>
-            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/Main.java</file>
+            <file>file:/C:/Users/maciek/programy/sise/iadrepo2/src/iad/HiddenNeuron.java</file>
         </group>
     </open-files>
 </project-private>
