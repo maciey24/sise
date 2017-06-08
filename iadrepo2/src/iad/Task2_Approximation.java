@@ -21,6 +21,7 @@ public class Task2_Approximation {
         static ArrayList<Point> trainPoints = new ArrayList<>();
         static ArrayList<Point> aproksymowanaFunkcja = new ArrayList<>();
         static ArrayList<Point> wszystkiePunkty = new ArrayList<>();
+        static ArrayList<Double> blad = new ArrayList<>();
 
 	public static void main(String[] args) 
         {
@@ -33,6 +34,12 @@ public class Task2_Approximation {
             Main.PlotPoints(aproksymowanaFunkcja);
             
             int liczbaPunktowTreningowych = 50;//liczba punktow treningowych
+            int liczbaNeuronow = 10;
+            int liczbaWarstwUkrytych = 3;
+            double predkoscUczenia = 0.0005;
+            double momentum = 0.4;
+            int liczbaEpok = 3000;
+            boolean bias = false;
             for(int i = 0; i<liczbaPunktowTreningowych; i++)
             {
                 double x = ThreadLocalRandom.current().nextDouble(1, 100); //zakres dziedzina punktow treningowych
@@ -46,63 +53,33 @@ public class Task2_Approximation {
                 trainPoints.add(new Point(1.0, x, Math.sqrt(x))); //redundantne do wykresu
             }
             Main.PlotPoints(trainPoints);
-            
-//                for(int i =0; i<trainX.size(); i++)
-//                {
-//                	for(int j = 0; j<trainX.get(i).length; j++)
-//                	{
-//                		wszystkiePunkty.add(new Point(0.0, trainX.get(i)[j], trainY.get(i)[j]));
-//                		trainPoints.add(new Point(0.0, trainX.get(i)[j], trainY.get(i)[j]));
-//                	}
-//                }
-//                
-//                for(int i =0; i<testX.size(); i++)
-//                {
-//                	wszystkiePunkty.add(new Point(1.0, testX.get(i), testY.get(i)));
-//                	aproksymowanaFunkcja.add(new Point(1.0, testX.get(i), testY.get(i)));
-//                }
-//                
-//                Main.PlotPoints(wszystkiePunkty, "Wykres danych treningowych i wzorcowych dla sieci", "x", "y", "Dane treningowe", "Dane wzorcowe");
-		// 1 - 20
-//                wszystkiePunkty.addAll(aproksymowanaFunkcja);
-                wszystkiePunkty.addAll(trainPoints);
-		for (int i=10; i<=10; i++) //liczba neuronow w kazdej warstwie ukrytej
-                {
-                    NeuralNetwork net = new NeuralNetwork(1, 4, i, 1, Boolean.FALSE);//druga liczba - liczba warstw, warstwy
-                    net.train(trainX, trainY, 0.0005, 0.6, 0.01, 15000);//predkosc uczenia, ped momentum, max blad, liczba epok epoki
 
-                    Double netError = 0.0;
+            String biasString = ", bez biasu.";
+            if(bias) biasString=", z biasem";
+                wszystkiePunkty.addAll(trainPoints);
+		for (int i=liczbaNeuronow; i<=liczbaNeuronow; i++) //liczba neuronow w kazdej warstwie ukrytej
+                {
+                    NeuralNetwork net = new NeuralNetwork(1, liczbaWarstwUkrytych+1, i, 1, Boolean.FALSE);//druga liczba - liczba warstw, warstwy
+                    blad = net.train(trainX, trainY, predkoscUczenia, momentum, 0.01, liczbaEpok);//predkosc uczenia, ped momentum, max blad, liczba epok epoki
+
                     for(int j=0; j<aproksymowanaFunkcja.size(); j++) 
                     {
                         Double res =  net.fwdPropagate(new Double [] { aproksymowanaFunkcja.get(j).getVals()[0] })[0];
                         c(aproksymowanaFunkcja.get(j).getVals()[0]+ " :" + res);
                         results.add(new Point(2.0, aproksymowanaFunkcja.get(j).getVals()[0], res));
-                        netError += res*res;
                     }
-                    Main.PlotPoints(results, "wykres odpowiedzi sieci na zbiór testowy dla "+i+" neuronow w warstwie ukrytej",
-                                    "x", "y", "zbior treningowy","funkcja aproksymowana");
                     wszystkiePunkty.addAll(results);
+                    aproksymowanaFunkcja.addAll(results);
+                    Main.PlotPoints(results, "wykres odpowiedzi sieci na zbiór testowy dla "+i+" neuronow w warstwie ukrytej",
+                        "x", "y", "zbior treningowy","funkcja aproksymowana");
+                    Main.PlotPoints(aproksymowanaFunkcja, "porównanie wykresów funkcji aproksymującej i aproksymowanej",
+                        "x", "y", "zbior treningowy","funkcja aproksymowana");
                     results.clear();
-                    netError /= trainPoints.size();
-//                    aby odkomentowac - ctrl + /
-
-//                    final NeuralNetwork netbiased = new NeuralNetwork(1, 1, i, 1, true);
-////                    netbiased.linearOutput(i);
-//                    net.train(trainX, trainY, 0.3, 0.5, 0.001, 100000);
-//
-//                    Double biasednetError = 0.0;
-//                    for(int j=0; j<testX.size(); j++) {
-//                            Double res =  net.fwdPropagate(new Double [] {testX.get(j)})[0] - testY.get(j);
-//                            results.add(new Point(1.0, testX.get(j), res));
-//                            biasednetError += res*res;
-//                    }
-//                    results.addAll(trainPoints);
-//                    Main.PlotPoints(results, "wykres funkcji treningowej i aproksymowanej testowej dla " + i + " neuronów w warstwie ukrytej", "x", "y", "zbiór treningowy","funkcja aproksymowana");
-//                    results.clear();
-//                    biasednetError /= testX.size();
-//                    System.out.println("Results of network "+i+": (biased)"+biasednetError+", (nonbiased)"+netError);
 		}
-                Main.PlotPoints(wszystkiePunkty, "wynik dzialania sieci", "x", "y", "seria1", "seria2");
+                Main.PlotPoints(wszystkiePunkty, "wynik dzialania sieci dla :"+System.lineSeparator()+liczbaPunktowTreningowych+" punktów treningowych, "+
+                        liczbaNeuronow+" neuronów w każdej warstwie ukrytej, "+ liczbaWarstwUkrytych +" warstw ukrytych, "+
+                        "prędkość uczenia: "+predkoscUczenia+", pęd uczenia: "+momentum+", liczba epok: "+liczbaEpok+biasString, "x", "y", "seria1", "seria2");
+                Main.PlotList(blad, "błąd", null, "numer epoki", "wartość błędu");
 	}
 	
         public static void c(Object o)
